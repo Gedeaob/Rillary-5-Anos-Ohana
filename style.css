@@ -571,7 +571,7 @@ body {
     display: block;
     border-radius: 10px;
     background-color: #f0f8ff; 
-    border: 3px solid var(--color-blue-main);
+    
 }
 
 #restart-button {
@@ -600,4 +600,112 @@ body {
 .aloha-message {
     margin-top: 20px; /* Ajuste o valor conforme necessário */
     text-align: center; /* Opcional: centraliza a frase */
+}
+
+/* Estilo para a Zona de Controle Dedicada */
+#control-zone {
+    width: 100%;
+    max-width: 600px;
+    height: 80px; /* Altura generosa para o dedo deslizar */
+    background-color: rgba(255, 255, 255, 0.5); /* Fundo claro para identificação */
+    border: 2px solid var(--color-pink-main);
+    border-radius: 10px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- CORES PERSONALIZADAS PARA O GRADIENTE --- */
+/* Baseado nas cores temáticas já definidas */
+:root {
+    --color-grad-1-b: #1F3F6D;   /* Azul Forte (Navy) */
+    --color-grad-2-b: #4D87E6;   /* Azul Suave (Main Blue) */
+    --color-grad-3-b: #E8F0FE;   /* Azul Claro (Light Background) */
+    --color-grad-1-p: #D37488;   /* Rosa Forte (Shadow Pink) */
+    --color-grad-2-p: #FF8BA0;   /* Rosa Suave (Main Pink) */
+    --color-grad-3-p: #FFEDED;   /* Rosa Claro (Very Light Pink) */
+}
+
+/* 1. Definição da Animação de Rotação */
+@keyframes border-rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 2. Estilo da Borda Giratória (Targeting o Wrapper e a Zona de Controle) */
+.game-area-wrapper,
+#control-zone {
+    /* Remove a borda estática */
+    border: none !important; 
+    
+    position: relative;
+    overflow: hidden; /* Importante para esconder as bordas do pseudo-elemento */
+    padding: 3px; /* Adiciona espaço para a borda animada */
+    
+    /* Configuração inicial da animação (opcional, mas bom para consistência) */
+    transition: box-shadow 0.3s ease; 
+}
+
+/* 3. Criação do Pseudo-Elemento (A Borda Giratória) */
+.game-area-wrapper::before,
+#control-zone::before {
+    content: '';
+    position: absolute;
+    inset: -20px; /* Expande o gradiente para garantir a cobertura */
+    background: conic-gradient(
+        var(--color-grad-1-b) 0deg,
+        var(--color-grad-2-b) 60deg,
+        var(--color-grad-3-b) 120deg,
+        var(--color-grad-1-p) 180deg,
+        var(--color-grad-2-p) 240deg,
+        var(--color-grad-3-p) 300deg,
+        var(--color-grad-1-b) 360deg
+    );
+    
+    /* Aplica a animação */
+    animation: border-rotate 60s linear infinite;
+    
+    /* Z-Index baixo para ficar ABAIXO do conteúdo principal */
+    z-index: 0;
+}
+
+/* 4. Estilo do Conteúdo Principal (Para ficar por cima) */
+/* Isso garante que o conteúdo, canvas e cor de fundo fiquem visíveis no centro */
+.game-area-wrapper::after,
+#control-zone::after {
+    content: '';
+    position: absolute;
+    inset: 3px; /* Define a espessura da borda animada */
+    background: white; /* Volta a cor de fundo interna para branco */
+    border-radius: inherit;
+    z-index: 1; 
+}
+
+/* Certifique-se que o Canvas e o texto da zona de controle fiquem no topo */
+#bouncing-ball-canvas,
+#control-zone p {
+    position: relative;
+    z-index: 2; 
+}
+
+/* Remove a borda estática da zona de controle, se ela estiver lá */
+#control-zone {
+    width: 100%;
+    max-width: 600px;
+    height: 80px; 
+    background-color: rgba(255, 255, 255, 0.5); 
+    border: 2px solid var(--color-pink-main);
+    border-radius: 10px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* NOVO: Impede a seleção e o menu de cópia no toque */
+    user-select: none;
+    -webkit-user-select: none; /* Para navegadores baseados em WebKit (iOS/Chrome) */
+    -moz-user-select: none;    /* Para navegadores baseados em Gecko (Firefox) */
+    -ms-user-select: none;     /* Para navegadores baseados em Microsoft */
 }
