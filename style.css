@@ -540,6 +540,10 @@ body {
     z-index: 1; 
 }
 
+#background-canvas {
+    z-index: 2; /* Garante que a imagem de contorno esteja acima do ::after */
+}
+
 #drawing-canvas {
     z-index: 3; 
 }
