@@ -1,12 +1,12 @@
 /* Paleta de Cores e Fontes */
 :root {
-    --color-blue-main: #4D87E6;    /* Azul primário do Stitch */
-    --color-pink-main: #FF8BA0;    /* Rosa da Angel e Destaques */
+    --color-blue-main: #4D87E6;    /* Azul primário do Stitch [cite: 58 */
+    --color-pink-main: #FF8BA0;    /* Rosa da Angel e Destaques [cite: 59 */
     --color-tropical-yellow: #FFD700;
     --color-background: #E8F0FE;
     --color-text-dark: #1F3F6D;
     
-    /* Cores do Gradiente para Animação */
+    /* Cores do Gradiente para Animação [cite: 163, 164, 165, 166, 167, 168 */
     --color-grad-1-b: #1F3F6D;   /* Azul Forte (Navy) */
     --color-grad-2-b: #4D87E6;   /* Azul Suave (Main Blue) */
     --color-grad-3-b: #E8F0FE;   /* Azul Claro (Light Background) */
@@ -19,19 +19,19 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Bubblegum Sans', cursive;
+    font-family: 'Bubblegum Sans', cursive; 
 }
 
 body {
-    background: linear-gradient(135deg, var(--color-background), #B0C4DE); /* Fundo suave */
-    color: var(--color-text-dark);
-    line-height: 1.6;
-    min-height: 100vh;
-    padding: 10px;
-    display: flex; 
-    flex-direction: column;
+    background: linear-gradient(135deg, var(--color-background), #B0C4DE); /* Fundo suave [cite: 63, 64 */
+    color: var(--color-text-dark); 
+    line-height: 1.6; 
+    min-height: 100vh; 
+    padding: 10px; 
+    display: flex; /* Para centralizar o conteúdo verticalmente  */
+    flex-direction: column; 
     justify-content: center;
-    align-items: center;
+    align-items: center; 
 }
 
 /* --- TELA INICIAL & PÁGINAS GERAIS --- */
@@ -41,23 +41,23 @@ body {
 }
 
 .menu-container {
-    text-align: center;
+    text-align: center; 
     max-width: 500px;
     padding: 20px;
     border-radius: 20px;
     background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    margin: 20px auto 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
+    margin: 20px auto 0; 
 }
 
 .rillary-name {
-    font-family: 'Pacifico', cursive;
-    font-size: 4.5rem;
-    color: var(--color-blue-main);
-    text-shadow: 3px 3px 0px var(--color-pink-main);
+    font-family: 'Pacifico', cursive; 
+    font-size: 4.5rem; 
+    color: var(--color-blue-main); 
+    text-shadow: 3px 3px 0px var(--color-pink-main); 
     opacity: 0; 
     transform: translateY(-20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; 
 }
 
 .age-text {
@@ -66,78 +66,78 @@ body {
     margin-top: -10px;
     opacity: 0;
     transform: translateY(-20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; 
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.03); box-shadow: 0 0 10px var(--color-pink-main), 0 0 5px var(--color-blue-main); }
+    0% { transform: scale(1);  }
+    100% { transform: scale(1.03); box-shadow: 0 0 10px var(--color-pink-main), 0 0 5px var(--color-blue-main);  }
 }
 
 .button-group {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px; 
     margin-top: 30px;
 }
 
 .game-button {
-    text-decoration: none;
+    text-decoration: none; 
     padding: 15px 25px;
-    border-radius: 30px;
+    border-radius: 30px; 
     font-size: 1.4rem;
     font-weight: bold;
-    color: white;
+    color: white; 
     box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out; 
     border: none;
-    cursor: pointer;
+    cursor: pointer; 
 }
 
 .pink-button {
-    background-color: var(--color-pink-main);
+    background-color: var(--color-pink-main); 
     box-shadow: 0 5px 0 #D37488;
 }
 
 .blue-button {
-    background-color: var(--color-blue-main);
-    box-shadow: 0 5px 0 #3C6CB5;
+    background-color: var(--color-blue-main); 
+    box-shadow: 0 5px 0 #3C6CB5; 
 }
 
 .game-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 7px 0 rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px); 
+    box-shadow: 0 7px 0 rgba(0, 0, 0, 0.2); 
 }
 
 .game-button:active {
-    transform: translateY(3px);
+    transform: translateY(3px); 
     box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 .home-link {
-    display: block;
-    margin-top: 15px;
+    display: block; 
+    margin-top: 15px; 
     font-size: 1.1rem;
     color: var(--color-pink-main);
     text-decoration: none;
-    font-weight: bold;
+    font-weight: bold; 
 }
 
 /* --- RODAPÉ --- */
 .main-footer {
-    width: 100%;
+    width: 100%; 
     max-width: 500px;
-    margin-top: 30px;
-    padding: 10px;
-    border-top: 2px solid var(--color-pink-main);
-    color: var(--color-text-dark);
-    font-size: 0.9rem;
-    line-height: 1.4;
-    text-align: center;
+    margin-top: 30px; 
+    padding: 10px; 
+    border-top: 2px solid var(--color-pink-main); 
+    color: var(--color-text-dark); 
+    font-size: 0.9rem; 
+    line-height: 1.4; 
+    text-align: center; 
 }
 
 .GTech-name {
-    color: #0624cc;
+    color: #0624cc;  /* Ajuste para ser mais visível que o verde neon */
     font-weight: bold;
 }
 
@@ -154,34 +154,33 @@ body {
 }
 
 .game-header {
-    background-color: var(--color-blue-main);
-    color: white;
+    background-color: var(--color-blue-main); 
+    color: white; 
     padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 15px;
+    border-radius: 10px; 
+    margin-bottom: 15px; 
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
 }
 
 /* --- ESTILO PARA JOGO DE DESENHO (DRAWING) --- */
 
 .game-area-wrapper {
-    position: relative;
+    position: relative; 
     margin: 0 auto;
-    padding: 10px;
-    background-color: white;
-    border-radius: 15px;
+    padding: 10px; 
+    background-color: white; 
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 600px;
+    max-width: 600px; 
     aspect-ratio: 1 / 1; 
 }
 
 .drawing-layer {
-    position: absolute;
+    position: absolute; 
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100%; 
 }
 
 /* CORREÇÃO: Aumenta Z-index para ficarem acima dos pseudo-elementos da borda */
@@ -190,64 +189,64 @@ body {
 }
 
 #drawing-canvas {
-    z-index: 3;
+    z-index: 3; 
 }
 
 /* --- JOGO DA BOLINHA (BALL GAME) E ANIMAÇÃO --- */
 
-/* 1. Definição da Animação de Rotação */
+/* 1. Definição da Animação de Rotação [cite: 169 */
 @keyframes border-rotate {
     to {
         transform: rotate(360deg);
     }
 }
 
-/* 2. Estilo da Borda Giratória (Targeting o Wrapper e a Zona de Controle) */
+/* 2. Estilo da Borda Giratória (Targeting o Wrapper e a Zona de Controle) [cite: 170 */
 .game-area-wrapper,
 #control-zone {
-    border: none !important; 
-    position: relative;
+    border: none !important; /* Remove borda estática [cite: 170 */
+    position: relative; 
     overflow: hidden; 
-    padding: 3px;
+    padding: 3px; 
     transition: box-shadow 0.3s ease; 
 }
 
-/* 3. Criação do Pseudo-Elemento (A Borda Giratória) */
+/* 3. Criação do Pseudo-Elemento (A Borda Giratória) [cite: 173 */
 .game-area-wrapper::before,
 #control-zone::before {
     content: '';
     position: absolute;
-    inset: -20px; 
+    inset: -20px; /* Expande o gradiente */
     background: conic-gradient(
         var(--color-grad-1-b) 0deg, var(--color-grad-2-b) 60deg, var(--color-grad-3-b) 120deg,
         var(--color-grad-1-p) 180deg, var(--color-grad-2-p) 240deg, var(--color-grad-3-p) 300deg,
         var(--color-grad-1-b) 360deg
-    );
-    animation: border-rotate 6s linear infinite;
+    ); 
+    animation: border-rotate 6s linear infinite; /* Aplica a rotação [cite: 175 */
     z-index: 0;
 }
 
-/* 4. Estilo do Conteúdo Principal (Máscara Branca) */
+/* 4. Estilo do Conteúdo Principal (Máscara Branca) [cite: 177 */
 .game-area-wrapper::after,
 #control-zone::after {
     content: '';
-    position: absolute;
-    inset: 3px; 
-    background: white; 
+    position: absolute; 
+    inset: 3px; /* Espessura da borda animada [cite: 177 */
+    background: white; /* Cor de fundo interna [cite: 178 */
     border-radius: 10px;
-    z-index: 1;
+    z-index: 1; 
 }
 
 /* Garante que o Canvas e o texto da zona de controle fiquem no topo */
 #bouncing-ball-canvas,
 #control-zone p {
-    position: relative;
-    z-index: 2;
+    position: relative; 
+    z-index: 2; 
 }
 
 #bouncing-ball-canvas {
-    width: 100%;
-    height: 100%;
+    width: 100%; 
+    height: 100%; 
     display: block;
     border-radius: 10px;
     background-color: #f0f8ff;
@@ -255,19 +254,19 @@ body {
 
 /* --- ZONA DE CONTROLE DEDICADA --- */
 #control-zone {
-    width: 100%;
-    max-width: 600px;
+    width: 100%; 
+    max-width: 600px; 
     height: 80px; 
     border-radius: 10px;
     margin-top: 10px;
-    display: flex;
-    justify-content: center;
+    display: flex; 
+    justify-content: center; 
     align-items: center;
     
-    /* CRÍTICO: Impede seleção de texto e menus de cópia no celular */
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
+    /* CORREÇÃO CRÍTICA: Impede seleção de texto e menus de cópia no celular */
+    user-select: none; 
+    -webkit-user-select: none; 
+    -moz-user-select: none; 
     -ms-user-select: none;
 }
 
@@ -282,16 +281,16 @@ body {
 }
 
 .image-option.selected {
-    border-color: var(--color-pink-main);
-    transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(255, 139, 160, 0.7);
+   border-color: var(--color-pink-main); 
+   transform: scale(1.05); 
+    box-shadow: 0 0 10px rgba(255, 139, 160, 0.7); 
 }
 
 /* --- RESPONSIVIDADE --- */
 @media (min-width: 600px) {
     .button-group {
-        flex-direction: row;
-        justify-content: center;
+        flex-direction: row; 
+        justify-content: center; 
         gap: 20px;
     }
 }
