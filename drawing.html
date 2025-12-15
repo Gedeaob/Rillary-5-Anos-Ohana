@@ -45,11 +45,13 @@
             </button>
         </div>
 
-        <div class="brush-size-controls" style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 20px;">
-            <label style="font-size: 1.1rem; color: var(--color-text-dark);">Tamanho:</label>
-            <button class="size-button" data-size="5" style="width: 25px; height: 25px; border-radius: 50%; background-color: var(--color-text-dark);"></button>
-            <button class="size-button selected-size" data-size="10" style="width: 35px; height: 35px; border-radius: 50%; background-color: var(--color-text-dark); border: 3px solid var(--color-tropical-yellow);"></button>
-            <button class="size-button" data-size="20" style="width: 45px; height: 45px; border-radius: 50%; background-color: var(--color-text-dark);"></button>
+        <div class="tool-controls" style="display: flex; justify-content: center; gap: 15px; margin-bottom: 20px;">
+            </div>
+
+        <div class="brush-size-controls" style="display: flex; flex-direction: column; align-items: center; gap: 5px; margin-bottom: 20px;">
+            <label style="font-size: 1.1rem; color: var(--color-text-dark);">Tamanho do Pincel:</label>
+            <input type="range" id="brush-size-slider" min="1" max="50" value="10" style="width: 80%;">
+            <span id="current-size-display" style="font-weight: bold;">10 px</span>
         </div>
         
         <div class="game-area-wrapper">
@@ -57,12 +59,19 @@
             <canvas id="drawing-canvas" class="drawing-layer"></canvas>
         </div>
 
-        <div class="drawing-controls">
-            <button id="clear-canvas" class="game-button pink-button" style="width: 45%;">Limpar</button>
-            <button id="save-drawing" class="game-button blue-button" style="width: 45%;">Salvar Desenho! 📸</button>
+        <div class="drawing-controls" style="flex-wrap: wrap;">
+            <button id="clear-canvas" class="game-button pink-button" style="width: 45%; margin-bottom: 10px;">Limpar</button>
+            <button id="open-save-options" class="game-button blue-button" style="width: 45%; margin-bottom: 10px;">Salvar Desenho! 💾</button>
+            
+            <div id="save-options" style="width: 100%; display: none; margin-top: 10px;">
+                <p style="margin-bottom: 10px;">Selecione o formato de download:</p>
+                <button class="game-button pink-button download-btn" data-format="png">PNG (Melhor Qualidade)</button>
+                <button class="game-button blue-button download-btn" data-format="jpg">JPG (Mais Leve)</button>
+                <button class="game-button pink-button download-btn" data-format="pdf">PDF (Para Imprimir)</button>
+            </div>
         </div>
 
-      <a href="index.html" class="home-link">Voltar ao Menu</a>
+        <a href="index.html" class="home-link">Voltar ao Menu</a>
     </div>
 
     <center><footer class="main-footer">
