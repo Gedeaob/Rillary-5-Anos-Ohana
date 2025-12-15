@@ -1,152 +1,143 @@
-/* Paleta de Cores e Fontes */
+/* =========================================
+   1. CONFIGURAÇÕES GERAIS E VARIÁVEIS
+   ========================================= */
 :root {
-    --color-blue-main: #4D87E6;    /* Azul primário do Stitch [cite: 58 */
-    --color-pink-main: #FF8BA0;    /* Rosa da Angel e Destaques [cite: 59 */
+    --color-blue-main: #4D87E6;    /* Azul Stitch */
+    --color-pink-main: #FF8BA0;    /* Rosa Angel */
     --color-tropical-yellow: #FFD700;
-    --color-background: #E8F0FE;
+    --color-background: #E8F0FE;   /* Fundo Claro */
     --color-text-dark: #1F3F6D;
-    
-    /* Cores do Gradiente para Animação [cite: 163, 164, 165, 166, 167, 168 */
-    --color-grad-1-b: #1F3F6D;   /* Azul Forte (Navy) */
-    --color-grad-2-b: #4D87E6;   /* Azul Suave (Main Blue) */
-    --color-grad-3-b: #E8F0FE;   /* Azul Claro (Light Background) */
-    --color-grad-1-p: #D37488;   /* Rosa Forte (Shadow Pink) */
-    --color-grad-2-p: #FF8BA0;   /* Rosa Suave (Main Pink) */
-    --color-grad-3-p: #FFEDED;   /* Rosa Claro (Very Light Pink) */
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Bubblegum Sans', cursive; 
+    font-family: 'Bubblegum Sans', cursive;
 }
 
 body {
-    background: linear-gradient(135deg, var(--color-background), #B0C4DE); /* Fundo suave [cite: 63, 64 */
-    color: var(--color-text-dark); 
-    line-height: 1.6; 
-    min-height: 100vh; 
-    padding: 10px; 
-    display: flex; /* Para centralizar o conteúdo verticalmente  */
-    flex-direction: column; 
-    justify-content: center;
-    align-items: center; 
-}
-
-/* --- TELA INICIAL & PÁGINAS GERAIS --- */
-
-.menu-body {
     background: linear-gradient(135deg, var(--color-background), #B0C4DE);
+    color: var(--color-text-dark);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza tudo horizontalmente */
+    justify-content: center;
 }
+
+/* =========================================
+   2. TELA INICIAL (MENU)
+   ========================================= */
 
 .menu-container {
-    text-align: center; 
+    text-align: center;
     max-width: 500px;
+    width: 100%;
     padding: 20px;
     border-radius: 20px;
     background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
-    margin: 20px auto 0; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    margin: 20px auto 0;
 }
 
 .rillary-name {
-    font-family: 'Pacifico', cursive; 
-    font-size: 4.5rem; 
-    color: var(--color-blue-main); 
-    text-shadow: 3px 3px 0px var(--color-pink-main); 
-    opacity: 0; 
-    transform: translateY(-20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out; 
+    font-family: 'Pacifico', cursive;
+    font-size: 4.5rem;
+    color: var(--color-blue-main);
+    text-shadow: 3px 3px 0px var(--color-pink-main);
 }
 
 .age-text {
     font-size: 1.8rem;
     color: var(--color-text-dark);
     margin-top: -10px;
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out; 
 }
 
+/* Animação do Stitch */
 @keyframes pulse {
-    0% { transform: scale(1);  }
-    100% { transform: scale(1.03); box-shadow: 0 0 10px var(--color-pink-main), 0 0 5px var(--color-blue-main);  }
+    0% { transform: scale(1); }
+    100% { transform: scale(1.03); box-shadow: 0 0 10px var(--color-pink-main), 0 0 5px var(--color-blue-main); }
 }
 
+.stitch-image {
+    max-width: 80%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.stitch-image.pulse {
+    animation: pulse 1.5s infinite alternate;
+}
+
+/* Botões do Menu */
 .button-group {
-    display: flex; 
-    flex-direction: column; 
-    gap: 15px; 
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     margin-top: 30px;
 }
 
+/* =========================================
+   3. BOTÕES (Estilo Geral)
+   ========================================= */
+
 .game-button {
-    text-decoration: none; 
+    text-decoration: none;
     padding: 15px 25px;
-    border-radius: 30px; 
+    border-radius: 30px;
     font-size: 1.4rem;
     font-weight: bold;
-    color: white; 
+    color: white;
     box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease-in-out; 
+    transition: all 0.2s ease-in-out;
     border: none;
-    cursor: pointer; 
+    cursor: pointer;
+    display: inline-block;
+}
+
+.game-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 0 rgba(0, 0, 0, 0.2);
+}
+
+.game-button:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 .pink-button {
-    background-color: var(--color-pink-main); 
+    background-color: var(--color-pink-main);
     box-shadow: 0 5px 0 #D37488;
 }
 
 .blue-button {
-    background-color: var(--color-blue-main); 
-    box-shadow: 0 5px 0 #3C6CB5; 
-}
-
-.game-button:hover {
-    transform: translateY(-2px); 
-    box-shadow: 0 7px 0 rgba(0, 0, 0, 0.2); 
-}
-
-.game-button:active {
-    transform: translateY(3px); 
-    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+    background-color: var(--color-blue-main);
+    box-shadow: 0 5px 0 #3C6CB5;
 }
 
 .home-link {
-    display: block; 
-    margin-top: 15px; 
+    display: block;
+    margin-top: 15px;
     font-size: 1.1rem;
     color: var(--color-pink-main);
     text-decoration: none;
-    font-weight: bold; 
-}
-
-/* --- RODAPÉ --- */
-.main-footer {
-    width: 100%; 
-    max-width: 500px;
-    margin-top: 30px; 
-    padding: 10px; 
-    border-top: 2px solid var(--color-pink-main); 
-    color: var(--color-text-dark); 
-    font-size: 0.9rem; 
-    line-height: 1.4; 
-    text-align: center; 
-}
-
-.GTech-name {
-    color: #0624cc;  /* Ajuste para ser mais visível que o verde neon */
     font-weight: bold;
 }
 
-/* --- ESTILOS DE JOGOS & PÁGINAS INTERNAS (Desenho, Bolinha, Álbum) --- */
+/* =========================================
+   4. CONTAINER DAS PÁGINAS DE JOGO
+   ========================================= */
 
 .game-page-container {
     padding: 20px;
     max-width: 600px;
-    margin: 20px auto;
+    width: 100%;
+    margin: 0 auto;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
@@ -154,125 +145,19 @@ body {
 }
 
 .game-header {
-    background-color: var(--color-blue-main); 
-    color: white; 
+    background-color: var(--color-blue-main);
+    color: white;
     padding: 10px;
-    border-radius: 10px; 
-    margin-bottom: 15px; 
+    border-radius: 10px;
+    margin-bottom: 15px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* --- ESTILO PARA JOGO DE DESENHO (DRAWING) --- */
+/* =========================================
+   5. JOGO DE DESENHO (Correções de Camadas)
+   ========================================= */
 
-.game-area-wrapper {
-    position: relative; 
-    margin: 0 auto;
-    padding: 10px; 
-    background-color: white; 
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 600px; 
-    aspect-ratio: 1 / 1; 
-}
-
-.drawing-layer {
-    position: absolute; 
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%; 
-}
-
-/* CORREÇÃO: Aumenta Z-index para ficarem acima dos pseudo-elementos da borda */
-#background-canvas {
-    z-index: 2; 
-}
-
-#drawing-canvas {
-    z-index: 3; 
-}
-
-/* --- JOGO DA BOLINHA (BALL GAME) E ANIMAÇÃO --- */
-
-/* 1. Definição da Animação de Rotação [cite: 169 */
-@keyframes border-rotate {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* 2. Estilo da Borda Giratória (Targeting o Wrapper e a Zona de Controle) [cite: 170 */
-.game-area-wrapper,
-#control-zone {
-    border: none !important; /* Remove borda estática [cite: 170 */
-    position: relative; 
-    overflow: hidden; 
-    padding: 3px; 
-    transition: box-shadow 0.3s ease; 
-}
-
-/* 3. Criação do Pseudo-Elemento (A Borda Giratória) [cite: 173 */
-.game-area-wrapper::before,
-#control-zone::before {
-    content: '';
-    position: absolute;
-    inset: -20px; /* Expande o gradiente */
-    background: conic-gradient(
-        var(--color-grad-1-b) 0deg, var(--color-grad-2-b) 60deg, var(--color-grad-3-b) 120deg,
-        var(--color-grad-1-p) 180deg, var(--color-grad-2-p) 240deg, var(--color-grad-3-p) 300deg,
-        var(--color-grad-1-b) 360deg
-    ); 
-    animation: border-rotate 6s linear infinite; /* Aplica a rotação [cite: 175 */
-    z-index: 0;
-}
-
-/* 4. Estilo do Conteúdo Principal (Máscara Branca) [cite: 177 */
-.game-area-wrapper::after,
-#control-zone::after {
-    content: '';
-    position: absolute; 
-    inset: 3px; /* Espessura da borda animada [cite: 177 */
-    background: white; /* Cor de fundo interna [cite: 178 */
-    border-radius: 10px;
-    z-index: 1; 
-}
-
-/* Garante que o Canvas e o texto da zona de controle fiquem no topo */
-#bouncing-ball-canvas,
-#control-zone p {
-    position: relative; 
-    z-index: 2; 
-}
-
-#bouncing-ball-canvas {
-    width: 100%; 
-    height: 100%; 
-    display: block;
-    border-radius: 10px;
-    background-color: #f0f8ff;
-}
-
-/* --- ZONA DE CONTROLE DEDICADA --- */
-#control-zone {
-    width: 100%; 
-    max-width: 600px; 
-    height: 80px; 
-    border-radius: 10px;
-    margin-top: 10px;
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-    
-    /* CORREÇÃO CRÍTICA: Impede seleção de texto e menus de cópia no celular */
-    user-select: none; 
-    -webkit-user-select: none; 
-    -moz-user-select: none; 
-    -ms-user-select: none;
-}
-
-
-/* --- CONTROLES DE IMAGEM/TAMANHO (Desenho) --- */
-
+/* Grid de seleção de imagem */
 .image-selection-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
@@ -280,17 +165,183 @@ body {
     margin-bottom: 20px;
 }
 
-.image-option.selected {
-   border-color: var(--color-pink-main); 
-   transform: scale(1.05); 
-    box-shadow: 0 0 10px rgba(255, 139, 160, 0.7); 
+.image-option {
+    border: 3px solid var(--color-background);
+    border-radius: 10px;
+    cursor: pointer;
+    overflow: hidden;
 }
 
-/* --- RESPONSIVIDADE --- */
+.image-option img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.image-option.selected {
+    border-color: var(--color-pink-main);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 139, 160, 0.7);
+}
+
+/* Paleta de Cores e Ferramentas */
+.palette, .tool-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.color-swatch, .color-picker-button {
+    width: 45px;
+    height: 45px;
+    border: 3px solid white;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.color-swatch.selected, .color-picker-button.selected, .tool-button.selected-tool {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px 3px var(--color-tropical-yellow);
+}
+
+/* ÁREA DE DESENHO (Onde ocorre a correção da "tela branca") */
+.game-area-wrapper {
+    position: relative;
+    margin: 0 auto;
+    padding: 0; /* Removido padding interno para ajuste exato */
+    background-color: white;
+    border: 3px solid var(--color-blue-main); /* Borda simples e estável */
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+.drawing-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Camada 1: Fundo (Imagem de contorno) */
+#background-canvas {
+    z-index: 1;
+}
+
+/* Camada 2: Desenho do Usuário (Fica por cima) */
+#drawing-canvas {
+    z-index: 2;
+}
+
+/* Slider de Tamanho */
+.brush-size-controls {
+    margin-bottom: 20px;
+}
+.brush-size-controls input[type=range] {
+    width: 80%;
+    accent-color: var(--color-pink-main);
+}
+
+/* =========================================
+   6. JOGO DA BOLINHA
+   ========================================= */
+
+#bouncing-ball-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 10px;
+    background-color: #f0f8ff;
+}
+
+/* Zona de Controle (Fixa, sem animação quebrada) */
+#control-zone {
+    width: 100%;
+    max-width: 600px;
+    height: 80px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border: 2px dashed var(--color-pink-main);
+    border-radius: 10px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Bloqueia seleção de texto ao arrastar */
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+#restart-button {
+    display: block;
+    width: 250px;
+    margin: 15px auto 0 auto;
+}
+
+/* =========================================
+   7. JOGO DA MEMÓRIA & ÁLBUM
+   ========================================= */
+
+.memory-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.album-access-area {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 3px dashed var(--color-pink-main);
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.85);
+}
+
+.album-button-large {
+    padding: 15px 30px;
+    font-size: 1.5em;
+    display: inline-block;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    color: white;
+    background-color: var(--color-blue-main);
+    box-shadow: 0 5px 0 #3C6CB5;
+}
+
+/* =========================================
+   8. RODAPÉ E RESPONSIVIDADE
+   ========================================= */
+
+.main-footer {
+    width: 100%;
+    max-width: 500px;
+    margin-top: 30px;
+    padding: 10px;
+    border-top: 2px solid var(--color-pink-main);
+    color: var(--color-text-dark);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.GTech-name {
+    color: #0624cc;
+    font-weight: bold;
+}
+
 @media (min-width: 600px) {
     .button-group {
-        flex-direction: row; 
-        justify-content: center; 
-        gap: 20px;
+        flex-direction: row;
+        justify-content: center;
     }
 }
