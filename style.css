@@ -1,628 +1,12 @@
 /* Paleta de Cores e Fontes */
 :root {
-    --color-blue-main: #4D87E6;    /* Azul primário do Stitch */
-    --color-pink-main: #FF8BA0;    /* Rosa da Angel e Destaques */
+    --color-blue-main: #4D87E6;    [cite_start]/* Azul primário do Stitch [cite: 58] */
+    --color-pink-main: #FF8BA0;    [cite_start]/* Rosa da Angel e Destaques [cite: 59] */
     --color-tropical-yellow: #FFD700;
     --color-background: #E8F0FE;
     --color-text-dark: #1F3F6D;
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Bubblegum Sans', cursive;
-}
-
-body {
-    background: var(--color-background);
-    color: var(--color-text-dark);
-    line-height: 1.6;
-    min-height: 100vh;
-    padding: 10px;
-}
-
-/* ---------------------------------- */
-/* ESTILO DA TELA INICIAL (index.html) */
-/* ---------------------------------- */
-
-.menu-body {
-    background: linear-gradient(135deg, var(--color-background), #B0C4DE); /* Fundo suave */
-    display: flex;
-    flex-direction: column; /* Altera para permitir que o rodapé fique abaixo */
-    justify-content: center;
-    align-items: center;
-}
-
-.menu-container {
-    text-align: center;
-    max-width: 500px;
-    padding: 20px;
-    border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    margin: 20px auto 0; /* Ajuste para não empurrar o footer */
-}
-
-.rillary-name {
-    font-family: 'Pacifico', cursive;
-    font-size: 4.5rem;
-    color: var(--color-blue-main);
-    text-shadow: 3px 3px 0px var(--color-pink-main);
-    opacity: 0; /* Inicia escondido para animação JS */
-    transform: translateY(-20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.age-text {
-    font-size: 1.8rem;
-    color: var(--color-text-dark);
-    margin-top: -10px;
-    opacity: 0; /* Inicia escondido para animação JS */
-    transform: translateY(-20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-/* Animação Pulsante para o Stitch (Referenciado no JS) */
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    100% {
-        transform: scale(1.03);
-        box-shadow: 0 0 10px var(--color-pink-main), 0 0 5px var(--color-blue-main);
-    }
-}
-
-.stitch-image {
-    max-width: 80%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.stitch-image.pulse {
-    animation: pulse 1.5s infinite alternate;
-}
-
-.button-group {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 30px;
-}
-
-.game-button {
-    text-decoration: none;
-    padding: 15px 25px;
-    border-radius: 30px;
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: white;
-    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease-in-out;
-    border: none;
-    cursor: pointer;
-}
-
-.pink-button {
-    background-color: var(--color-pink-main);
-    box-shadow: 0 5px 0 #D37488;
-}
-
-.blue-button {
-    background-color: var(--color-blue-main);
-    box-shadow: 0 5px 0 #3C6CB5;
-}
-
-.game-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 7px 0 rgba(0, 0, 0, 0.2);
-}
-
-.game-button:active {
-    transform: translateY(3px);
-    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
-}
-
-/* ---------------------------------- */
-/* ESTILO COMUM PARA JOGOS */
-/* ---------------------------------- */
-
-.game-page-container {
-    padding: 10px;
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: center
-    ;
-}
-
-.game-header {
-    background-color: var(--color-blue-main);
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-}
-
-.home-link {
-    display: block;
-    margin-top: 15px;
-    font-size: 1.1rem;
-    color: var(--color-pink-main);
-    text-decoration: none;
-    font-weight: bold;
-}
-
-/* ---------------------------------- */
-/* NOVO ESTILO PARA O RODAPÉ (FOOTER) */
-/* ---------------------------------- */
-.main-footer {
-    width: 100%;
-    max-width: 500px;
-    margin-top: 30px;
-    padding: 10px;
-    border-top: 2px solid var(--color-pink-main);
-    color: var(--color-text-dark);
-    font-size: 0.9rem;
-    line-height: 1.4;
-    text-align: center;
-}
-
-.GTech-name {
-    /* Cor verde neon escuro */
-    color: #0624cc; 
-   
-}
-
-/* ---------------------------------- */
-/* NOVO ESTILO PARA O JOGO DE DESENHO */
-/* ---------------------------------- */
-
-.drawing-controls {
-    /* Garante espaçamento entre os botões Limpar e Salvar */
-    display: flex;
-    justify-content: center;
-    gap: 20px; 
-    margin: 15px 0;
-}
-
-.palette {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-    flex-wrap: wrap; 
-}
-
-.color-swatch, .color-picker-button {
-    width: 45px; /* Tamanho maior para clique fácil no celular */
-    height: 45px;
-    border: 3px solid white;
-    border-radius: 8px; 
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.color-picker-button {
-    border-radius: 50%; /* Círculo */
-    background-color: #ffffff; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    color: var(--color-text-dark);
-    position: relative;
-    overflow: hidden; /* Esconde a caixa do input:color */
-}
-
-.drawing-layer {
-    position: absolute; /* Coloca o canvas superior sobre o inferior */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Garante que o background-canvas fique no fundo (z-index baixo) */
-    z-index: 1; 
-}
-
-.color-swatch.selected, .color-picker-button.selected {
-    transform: scale(1.1);
-    box-shadow: 0 0 10px 3px var(--color-tropical-yellow); /* Destaque na cor selecionada */
-}
-
-/* Posiciona o input:color sobre o círculo para abri-lo */
-#color-input {
-    position: absolute;
-    width: 150%;
-    height: 150%;
-    opacity: 0;
-    cursor: pointer;
-}
-
-.game-area-wrapper {
-    position: relative;
-    margin: 0 auto;
-    padding: 10px;
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 600px;
-    aspect-ratio: 1 / 1; /* Exemplo: define um aspecto quadrado, se a imagem for 1:1 */
-}
-
-#drawing-canvas {
-    display: block;
-    max-width: 100%;
-    z-index: 2;
-}
-
-/* Estilo da grade de seleção de imagens */
-.image-selection-grid {
-    display: grid;
-    /* 2 colunas em celular, ajusta para 4 ou mais em desktop */
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); 
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.image-option {
-    border: 3px solid var(--color-background);
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s, border-color 0.3s;
-    overflow: hidden;
-}
-
-.image-option img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 5px;
-}
-
-.image-option.selected {
-    border-color: var(--color-pink-main);
-    transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(255, 139, 160, 0.7);
-}
-
-
-/* ---------------------------------- */
-/* ESTILO PARA QUEBRA-CABEÇA */
-/* ---------------------------------- */
-.puzzle-area {
-    display: grid;
-    width: 100%;
-    position: relative;
-    margin: 0 auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-.puzzle-piece {
-    border: 1px solid rgba(255, 255, 255, 0.5); /* Borda clara entre as peças */
-    transition: transform 0.1s;
-    cursor: grab;
-    touch-action: none; /* Essencial para toque no mobile */
-}
-
-.puzzle-piece.dragging {
-    opacity: 0.5;
-    z-index: 1000;
-}
-
-
-/* 💻 Mídia Query para Tablets e Desktops (Responsividade) */
-@media (min-width: 600px) {
-    .button-group {
-        flex-direction: row; 
-        justify-content: center;
-        gap: 20px;
-    }
     
-    .image-selection-grid {
-        grid-template-columns: repeat(5, 1fr); /* 5 colunas em desktop */
-    }
-}
-
-/* Garante que o Canvas ocupe todo o espaço do wrapper */
-#bouncing-ball-canvas {
-    width: 100%;
-    height: 100%;
-    display: block;
-    border-radius: 10px;
-    background-color: #f0f8ff; /* Fundo levemente azul/branco */
-    border: 3px solid var(--color-blue-main);
-}
-
-/* Centralização do Botão de Reiniciar após Game Over */
-/* Remove a animação de hover/active quando o botão está visível no Game Over */
-#restart-button {
-    /* Garante que o botão não 'pule' mesmo se houver animações na classe .game-button */
-    transform: none !important;
-    box-shadow: 0 5px 0 #D37488 !important; 
-    transition: none !important;
-    display: block !important; /* Força o botão a se comportar como um bloco para que margin: 0 auto funcione */
-    width: 250px; /* Defina uma largura fixa ou máxima para que a margem automática funcione */
-    margin: 15px auto 0 auto; /* Centraliza horizontalmente: 0 auto */
-    
-}
-
-#restart-button:hover {
-    transform: none !important;
-}
-
-/* O container principal (game-page-container) já deve centralizar os itens de bloco */
-
-/* Paleta de Cores e Fontes */
-:root {
-    --color-blue-main: #4D87E6;    /* Azul primário do Stitch */
-    --color-pink-main: #FF8BA0;    /* Rosa da Angel e Destaques */
-    --color-tropical-yellow: #FFD700;
-    --color-background: #E8F0FE;
-    --color-text-dark: #1F3F6D;
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Bubblegum Sans', cursive;
-}
-
-body {
-    background: var(--color-background);
-    color: var(--color-text-dark);
-    line-height: 1.6;
-    min-height: 100vh;
-    padding: 10px;
-}
-
-/* --- TELA INICIAL --- */
-
-.menu-body {
-    background: linear-gradient(135deg, var(--color-background), #B0C4DE);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.menu-container {
-    text-align: center;
-    max-width: 500px;
-    padding: 20px;
-    border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    margin: 20px auto 0;
-}
-
-.rillary-name {
-    font-family: 'Pacifico', cursive;
-    font-size: 4.5rem;
-    color: var(--color-blue-main);
-    text-shadow: 3px 3px 0px var(--color-pink-main);
-    opacity: 0; 
-    transform: translateY(-20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.age-text {
-    font-size: 1.8rem;
-    color: var(--color-text-dark);
-    margin-top: -10px;
-    opacity: 0; 
-    transform: translateY(-20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-/* --- ESTILO COMUM --- */
-
-.game-page-container {
-    padding: 10px;
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.game-header {
-    background-color: var(--color-blue-main);
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-}
-
-.game-button {
-    text-decoration: none;
-    padding: 15px 25px;
-    border-radius: 30px;
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: white;
-    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease-in-out;
-    border: none;
-    cursor: pointer;
-}
-
-.game-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 7px 0 rgba(0, 0, 0, 0.2);
-}
-
-.pink-button {
-    background-color: var(--color-pink-main);
-    box-shadow: 0 5px 0 #D37488;
-}
-
-.blue-button {
-    background-color: var(--color-blue-main);
-    box-shadow: 0 5px 0 #3C6CB5;
-}
-
-
-/* --- RODAPÉ --- */
-.main-footer {
-    width: 100%;
-    max-width: 500px;
-    margin-top: 30px;
-    padding: 10px;
-    border-top: 2px solid var(--color-pink-main);
-    color: var(--color-text-dark);
-    font-size: 0.9rem;
-    line-height: 1.4;
-    text-align: center;
-}
-
-.gtech-name {
-    color: #39FF14; 
-    font-weight: bold;
-    text-shadow: 0 0 5px rgba(57, 255, 20, 0.5);
-}
-
-/* --- FERRAMENTAS DE DESENHO --- */
-
-.drawing-controls {
-    display: flex;
-    justify-content: center;
-    gap: 20px; 
-    margin: 15px 0;
-}
-
-.palette {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-    flex-wrap: wrap; 
-}
-
-.color-swatch, .color-picker-button {
-    width: 45px; 
-    height: 45px;
-    border: 3px solid white;
-    border-radius: 8px; 
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.color-swatch.selected, .color-picker-button.selected, .tool-button.selected-tool {
-    transform: scale(1.1);
-    box-shadow: 0 0 10px 3px var(--color-tropical-yellow); 
-}
-
-/* --- CANVAS LAYERS (DESENHO) --- */
-.game-area-wrapper {
-    position: relative; 
-    margin: 0 auto;
-    padding: 10px;
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 600px; 
-    aspect-ratio: 1 / 1; 
-}
-
-.drawing-layer {
-    position: absolute; 
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1; 
-}
-
-#background-canvas {
-    z-index: 2; /* Garante que a imagem de contorno esteja acima do ::after */
-}
-
-#drawing-canvas {
-    z-index: 3; 
-}
-
-/* --- CONTROLES DE IMAGEM/TAMANHO --- */
-
-.image-selection-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.image-option.selected {
-    border-color: var(--color-pink-main);
-    transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(255, 139, 160, 0.7);
-}
-
-.size-button.selected-size {
-    border: 3px solid var(--color-tropical-yellow) !important;
-}
-
-/* --- JOGO DA BOLINHA --- */
-
-#bouncing-ball-canvas {
-    width: 100%;
-    height: 100%;
-    display: block;
-    border-radius: 10px;
-    background-color: #f0f8ff; 
-    
-}
-
-#restart-button {
-    display: block !important; 
-    width: 250px; 
-    margin: 15px auto 0 auto; 
-    
-    transform: none !important;
-    box-shadow: 0 5px 0 #D37488 !important; 
-    transition: none !important;
-}
-
-#restart-button:hover {
-    transform: none !important;
-}
-
-/* --- RESPONSIVIDADE --- */
-@media (min-width: 600px) {
-    .button-group {
-        flex-direction: row; 
-        justify-content: center;
-        gap: 20px;
-    }
-}
-
-.aloha-message {
-    margin-top: 20px; /* Ajuste o valor conforme necessário */
-    text-align: center; /* Opcional: centraliza a frase */
-}
-
-/* Estilo para a Zona de Controle Dedicada */
-#control-zone {
-    width: 100%;
-    max-width: 600px;
-    height: 80px; /* Altura generosa para o dedo deslizar */
-    background-color: rgba(255, 255, 255, 0.5); /* Fundo claro para identificação */
-    border: 2px solid var(--color-pink-main);
-    border-radius: 10px;
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* --- CORES PERSONALIZADAS PARA O GRADIENTE --- */
-/* Baseado nas cores temáticas já definidas */
-:root {
+    [cite_start]/* Cores do Gradiente para Animação [cite: 163, 164, 165, 166, 167, 168] */
     --color-grad-1-b: #1F3F6D;   /* Azul Forte (Navy) */
     --color-grad-2-b: #4D87E6;   /* Azul Suave (Main Blue) */
     --color-grad-3-b: #E8F0FE;   /* Azul Claro (Light Background) */
@@ -631,85 +15,283 @@ body {
     --color-grad-3-p: #FFEDED;   /* Rosa Claro (Very Light Pink) */
 }
 
-/* 1. Definição da Animação de Rotação */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    [cite_start]font-family: 'Bubblegum Sans', cursive; [cite: 61]
+}
+
+body {
+    background: linear-gradient(135deg, var(--color-background), #B0C4DE); [cite_start]/* Fundo suave [cite: 63, 64] */
+    [cite_start]color: var(--color-text-dark); [cite: 60]
+    [cite_start]line-height: 1.6; [cite: 62]
+    [cite_start]min-height: 100vh; [cite: 62]
+    [cite_start]padding: 10px; [cite: 62]
+    display: flex; [cite_start]/* Para centralizar o conteúdo verticalmente [cite: 65] */
+    [cite_start]flex-direction: column; [cite: 65]
+    justify-content: center;
+    [cite_start]align-items: center; [cite: 66]
+}
+
+/* --- TELA INICIAL & PÁGINAS GERAIS --- */
+
+.menu-body {
+    background: linear-gradient(135deg, var(--color-background), #B0C4DE);
+}
+
+.menu-container {
+    [cite_start]text-align: center; [cite: 67]
+    max-width: 500px;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    [cite_start]box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); [cite: 67]
+    [cite_start]margin: 20px auto 0; [cite: 68]
+}
+
+.rillary-name {
+    [cite_start]font-family: 'Pacifico', cursive; [cite: 69]
+    [cite_start]font-size: 4.5rem; [cite: 131]
+    [cite_start]color: var(--color-blue-main); [cite: 69]
+    [cite_start]text-shadow: 3px 3px 0px var(--color-pink-main); [cite: 69]
+    opacity: 0; 
+    transform: translateY(-20px);
+    [cite_start]transition: opacity 0.8s ease-out, transform 0.8s ease-out; [cite: 132]
+}
+
+.age-text {
+    font-size: 1.8rem;
+    [cite_start]color: var(--color-text-dark); [cite: 71]
+    margin-top: -10px;
+    opacity: 0;
+    transform: translateY(-20px);
+    [cite_start]transition: opacity 0.8s ease-out, transform 0.8s ease-out; [cite: 72]
+}
+
+@keyframes pulse {
+    [cite_start]0% { transform: scale(1); [cite: 73] }
+    [cite_start]100% { transform: scale(1.03); box-shadow: 0 0 10px var(--color-pink-main), 0 0 5px var(--color-blue-main); [cite: 74] }
+}
+
+.button-group {
+    [cite_start]display: flex; [cite: 77]
+    [cite_start]flex-direction: column; [cite: 77]
+    [cite_start]gap: 15px; [cite: 77]
+    margin-top: 30px;
+}
+
+.game-button {
+    [cite_start]text-decoration: none; [cite: 78]
+    padding: 15px 25px;
+    [cite_start]border-radius: 30px; [cite: 136]
+    font-size: 1.4rem;
+    font-weight: bold;
+    [cite_start]color: white; [cite: 78]
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+    [cite_start]transition: all 0.2s ease-in-out; [cite: 137]
+    border: none;
+    [cite_start]cursor: pointer; [cite: 79]
+}
+
+.pink-button {
+    [cite_start]background-color: var(--color-pink-main); [cite: 59]
+    box-shadow: 0 5px 0 #D37488;
+}
+
+.blue-button {
+    [cite_start]background-color: var(--color-blue-main); [cite: 80]
+    [cite_start]box-shadow: 0 5px 0 #3C6CB5; [cite: 80]
+}
+
+.game-button:hover {
+    [cite_start]transform: translateY(-2px); [cite: 81]
+    [cite_start]box-shadow: 0 7px 0 rgba(0, 0, 0, 0.2); [cite: 81]
+}
+
+.game-button:active {
+    [cite_start]transform: translateY(3px); [cite: 82]
+    [cite_start]box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2); [cite: 82]
+}
+
+.home-link {
+    [cite_start]display: block; [cite: 85]
+    [cite_start]margin-top: 15px; [cite: 85]
+    font-size: 1.1rem;
+    color: var(--color-pink-main);
+    text-decoration: none;
+    [cite_start]font-weight: bold; [cite: 86]
+}
+
+/* --- RODAPÉ --- */
+.main-footer {
+    [cite_start]width: 100%; [cite: 87]
+    max-width: 500px;
+    [cite_start]margin-top: 30px; [cite: 87]
+    [cite_start]padding: 10px; [cite: 140]
+    [cite_start]border-top: 2px solid var(--color-pink-main); [cite: 140]
+    [cite_start]color: var(--color-text-dark); [cite: 140]
+    [cite_start]font-size: 0.9rem; [cite: 140]
+    [cite_start]line-height: 1.4; [cite: 140]
+    [cite_start]text-align: center; [cite: 141]
+}
+
+.GTech-name {
+    [cite_start]color: #0624cc; [cite: 89] /* Ajuste para ser mais visível que o verde neon */
+    font-weight: bold;
+}
+
+/* --- ESTILOS DE JOGOS & PÁGINAS INTERNAS (Desenho, Bolinha, Álbum) --- */
+
+.game-page-container {
+    padding: 20px;
+    [cite_start]max-width: 600px; [cite: 134]
+    margin: 20px auto;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.game-header {
+    [cite_start]background-color: var(--color-blue-main); [cite: 135]
+    color: white;
+    padding: 10px;
+    [cite_start]border-radius: 10px; [cite: 135]
+    [cite_start]margin-bottom: 15px; [cite: 135]
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* --- ESTILO PARA JOGO DE DESENHO (DRAWING) --- */
+
+.game-area-wrapper {
+    [cite_start]position: relative; [cite: 147]
+    margin: 0 auto;
+    [cite_start]padding: 10px; [cite: 147]
+    [cite_start]background-color: white; [cite: 148]
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    [cite_start]max-width: 600px; [cite: 148]
+    aspect-ratio: 1 / 1; 
+}
+
+.drawing-layer {
+    [cite_start]position: absolute; [cite: 149]
+    top: 0;
+    left: 0;
+    width: 100%;
+    [cite_start]height: 100%; [cite: 149]
+}
+
+/* CORREÇÃO: Aumenta Z-index para ficarem acima dos pseudo-elementos da borda */
+#background-canvas {
+    z-index: 2; 
+}
+
+#drawing-canvas {
+    [cite_start]z-index: 3; [cite: 150]
+}
+
+/* --- JOGO DA BOLINHA (BALL GAME) E ANIMAÇÃO --- */
+
+[cite_start]/* 1. Definição da Animação de Rotação [cite: 169] */
 @keyframes border-rotate {
     to {
         transform: rotate(360deg);
     }
 }
 
-/* 2. Estilo da Borda Giratória (Targeting o Wrapper e a Zona de Controle) */
+[cite_start]/* 2. Estilo da Borda Giratória (Targeting o Wrapper e a Zona de Controle) [cite: 170] */
 .game-area-wrapper,
 #control-zone {
-    /* Remove a borda estática */
-    border: none !important; 
-    
-    position: relative;
-    overflow: hidden; /* Importante para esconder as bordas do pseudo-elemento */
-    padding: 3px; /* Adiciona espaço para a borda animada */
-    
-    /* Configuração inicial da animação (opcional, mas bom para consistência) */
+    border: none !important; [cite_start]/* Remove borda estática [cite: 170] */
+    [cite_start]position: relative; [cite: 170]
+    overflow: hidden; 
+    [cite_start]padding: 3px; [cite: 171]
     transition: box-shadow 0.3s ease; 
 }
 
-/* 3. Criação do Pseudo-Elemento (A Borda Giratória) */
+[cite_start]/* 3. Criação do Pseudo-Elemento (A Borda Giratória) [cite: 173] */
 .game-area-wrapper::before,
 #control-zone::before {
     content: '';
-    position: absolute;
-    inset: -20px; /* Expande o gradiente para garantir a cobertura */
+    [cite_start]position: absolute; [cite: 173]
+    inset: -20px; [cite_start]/* Expande o gradiente [cite: 173] */
     background: conic-gradient(
-        var(--color-grad-1-b) 0deg,
-        var(--color-grad-2-b) 60deg,
-        var(--color-grad-3-b) 120deg,
-        var(--color-grad-1-p) 180deg,
-        var(--color-grad-2-p) 240deg,
-        var(--color-grad-3-p) 300deg,
+        var(--color-grad-1-b) 0deg, var(--color-grad-2-b) 60deg, var(--color-grad-3-b) 120deg,
+        var(--color-grad-1-p) 180deg, var(--color-grad-2-p) 240deg, var(--color-grad-3-p) 300deg,
         var(--color-grad-1-b) 360deg
-    );
-    
-    /* Aplica a animação */
-    animation: border-rotate 60s linear infinite;
-    
-    /* Z-Index baixo para ficar ABAIXO do conteúdo principal */
-    z-index: 0;
+    [cite_start]); [cite: 174]
+    animation: border-rotate 6s linear infinite; [cite_start]/* Aplica a rotação [cite: 175] */
+    [cite_start]z-index: 0; [cite: 176]
 }
 
-/* 4. Estilo do Conteúdo Principal (Para ficar por cima) */
-/* Isso garante que o conteúdo, canvas e cor de fundo fiquem visíveis no centro */
+[cite_start]/* 4. Estilo do Conteúdo Principal (Máscara Branca) [cite: 177] */
 .game-area-wrapper::after,
 #control-zone::after {
     content: '';
-    position: absolute;
-    inset: 3px; /* Define a espessura da borda animada */
-    background: white; /* Volta a cor de fundo interna para branco */
-    border-radius: inherit;
-    z-index: 1; 
+    [cite_start]position: absolute; [cite: 177]
+    inset: 3px; [cite_start]/* Espessura da borda animada [cite: 177] */
+    background: white; [cite_start]/* Cor de fundo interna [cite: 178] */
+    border-radius: 10px;
+    [cite_start]z-index: 1; [cite: 179]
 }
 
-/* Certifique-se que o Canvas e o texto da zona de controle fiquem no topo */
+/* Garante que o Canvas e o texto da zona de controle fiquem no topo */
 #bouncing-ball-canvas,
 #control-zone p {
-    position: relative;
-    z-index: 2; 
+    [cite_start]position: relative; [cite: 180]
+    [cite_start]z-index: 2; [cite: 180]
 }
 
-/* Remove a borda estática da zona de controle, se ela estiver lá */
+#bouncing-ball-canvas {
+    [cite_start]width: 100%; [cite: 117]
+    [cite_start]height: 100%; [cite: 117]
+    display: block;
+    border-radius: 10px;
+    [cite_start]background-color: #f0f8ff; [cite: 154]
+}
+
+/* --- ZONA DE CONTROLE DEDICADA --- */
 #control-zone {
-    width: 100%;
-    max-width: 600px;
+    [cite_start]width: 100%; [cite: 181]
+    [cite_start]max-width: 600px; [cite: 181]
     height: 80px; 
-    background-color: rgba(255, 255, 255, 0.5); 
-    border: 2px solid var(--color-pink-main);
     border-radius: 10px;
     margin-top: 10px;
-    display: flex;
-    justify-content: center;
+    [cite_start]display: flex; [cite: 182]
+    [cite_start]justify-content: center; [cite: 182]
     align-items: center;
     
-    /* NOVO: Impede a seleção e o menu de cópia no toque */
-    user-select: none;
-    -webkit-user-select: none; /* Para navegadores baseados em WebKit (iOS/Chrome) */
-    -moz-user-select: none;    /* Para navegadores baseados em Gecko (Firefox) */
-    -ms-user-select: none;     /* Para navegadores baseados em Microsoft */
+    /* CORREÇÃO CRÍTICA: Impede seleção de texto e menus de cópia no celular */
+    [cite_start]user-select: none; [cite: 183]
+    [cite_start]-webkit-user-select: none; [cite: 183]
+    [cite_start]-moz-user-select: none; [cite: 184]
+    [cite_start]-ms-user-select: none; [cite: 184]
+}
+
+
+/* --- CONTROLES DE IMAGEM/TAMANHO (Desenho) --- */
+
+.image-selection-grid {
+    display: grid;
+    [cite_start]grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); [cite: 151]
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.image-option.selected {
+    [cite_start]border-color: var(--color-pink-main); [cite: 152]
+    [cite_start]transform: scale(1.05); [cite: 152]
+    [cite_start]box-shadow: 0 0 10px rgba(255, 139, 160, 0.7); [cite: 152]
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (min-width: 600px) {
+    .button-group {
+        [cite_start]flex-direction: row; [cite: 157]
+        [cite_start]justify-content: center; [cite: 157]
+        gap: 20px;
+    }
 }
