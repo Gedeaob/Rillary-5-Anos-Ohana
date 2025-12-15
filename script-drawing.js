@@ -1,22 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Mapeamento dos DOIS canvas e seus contextos
-    const drawingCanvas = document.getElementById('drawing-canvas'); // Camada Superior (Interativa)
-    const bgCanvas = document.getElementById('background-canvas');   // Camada Inferior (Fundo Estático)
-
-    const ctx = drawingCanvas.getContext('2d'); // Contexto de Desenho (Para pincel e borracha)
-    const bgCtx = bgCanvas.getContext('2d');   // Contexto de Fundo (Para a imagem de contorno)
+    const drawingCanvas = document.getElementById('drawing-canvas');
+    const bgCanvas = document.getElementById('background-canvas');
+    const ctx = drawingCanvas.getContext('2d');
+    const bgCtx = bgCanvas.getContext('2d');
     
-    // Variáveis de Mapeamento
-    const palette = document.getElementById('color-palette');
+    // Novas variáveis de UI
     const clearButton = document.getElementById('clear-canvas');
-    const saveButton = document.getElementById('save-drawing');
-    const colorSwatches = palette.querySelectorAll('.color-swatch');
-    const colorInput = document.getElementById('color-input');
-    const colorPickerButton = document.querySelector('.color-picker-button');
+    const openSaveOptionsButton = document.getElementById('open-save-options');
+    const saveOptionsDiv = document.getElementById('save-options');
+    const downloadButtons = document.querySelectorAll('.download-btn');
+    const brushSizeSlider = document.getElementById('brush-size-slider');
+    const currentSizeDisplay = document.getElementById('current-size-display');
     const freeDrawButton = document.getElementById('free-draw-button');
     const imageSelectionGrid = document.getElementById('image-selection-grid');
     const toolButtons = document.querySelectorAll('.tool-button');
-    const sizeButtons = document.querySelectorAll('.size-button');
+    const colorSwatches = document.querySelectorAll('#color-palette .color-swatch');
+    const colorInput = document.getElementById('color-input');
+    const colorPickerButton = document.querySelector('.color-picker-button');
     
     // Lista de Imagens de Contorno
     const drawingImages = [
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let brushSize = 10;
     let currentTool = 'brush'; 
     
-    // Configurações iniciais do Contexto (Aplicado APENAS ao ctx)
+    // Configurações iniciais do Contexto
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
     ctx.lineWidth = brushSize;
@@ -43,12 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Funções de Inicialização e Responsividade
     // ----------------------------------------------------
     
-    /**
-     * Ajusta o tamanho dos DOIS canvas e redesenha a imagem de fundo no canvas INFERIOR.
-     */
     function resizeCanvas() {
         const wrapper = drawingCanvas.parentElement;
-        const size = Math.min(wrapper.clientWidth, 600);
+        const size = Math.min(wrapper.clientWidth - 20, 600);
 
         // 1. Ajusta o tamanho dos DOIS Canvas
         drawingCanvas.width = size;
@@ -56,8 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
         bgCanvas.width = size;
         bgCanvas.height = size;
         
-        // 2. Limpa SOMENTE o Canvas de Desenho (superior)
-        ctx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+        // 2. Não limpa o canvas de desenho. Ele deve manter o que foi desenhado.
+        // O bug de auto-apagamento é resolvido NÃO chamando ctx.clearRect() aqui.
         
         // 3. Redesenha a imagem de contorno no Canvas de Fundo (inferior)
         bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
@@ -65,37 +62,54 @@ document.addEventListener('DOMContentLoaded', () => {
             bgCtx.drawImage(selectedImageObj, 0, 0, bgCanvas.width, bgCanvas.height);
         }
 
-        // 4. Reinicia as configurações do pincel/borracha (apenas no ctx)
+        // 4. Reinicia as configurações de pincel
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
         ctx.lineWidth = brushSize;
-        setActiveTool(currentTool, false); // Re-aplica a ferramenta para atualizar o globalCompositeOperation
+        setActiveTool(currentTool, false); 
     }
     
-    /**
-     * Seleciona uma imagem de contorno.
-     */
     function selectDrawingImage(selectedOption, fileName) {
         document.querySelectorAll('.image-option').forEach(opt => opt.classList.remove('selected'));
         selectedOption.classList.add('selected');
         
         if (lastLoadedImageName !== fileName) {
             selectedImageObj = new Image();
-            // *** LINHA ADICIONADA: Configura o CORS para evitar o erro de poluição ***
-            selectedImageObj.crossOrigin = "anonymous"; 
+            selectedImageObj.crossOrigin = "anonymous";
             
             selectedImageObj.onload = () => {
                 lastLoadedImageName = fileName;
+                // Limpa o desenho anterior ao carregar nova imagem
+                ctx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
                 resizeCanvas();
             };
             selectedImageObj.src = `images/drawing/${fileName}`;
         } else {
-            resizeCanvas(); // Apenas limpa o canvas superior
+            resizeCanvas(); 
         }
     }
-
-    // [Funções de Posicionamento e Evento (Desenho/Toque)]
-
+    
+    // (setupImageSelection, getPosition, startDrawing, draw, stopDrawing - MANTIDOS)
+    
+    function setupImageSelection() {
+        imageSelectionGrid.innerHTML = '';
+        drawingImages.forEach((fileName, index) => {
+            const option = document.createElement('div');
+            option.classList.add('image-option');
+            option.dataset.image = fileName;
+            
+            const img = document.createElement('img');
+            img.src = `images/drawing/${fileName}`;
+            img.alt = `Desenho para colorir ${index + 1}`;
+            option.appendChild(img);
+            
+            option.addEventListener('click', () => {
+                selectDrawingImage(option, fileName);
+            });
+            imageSelectionGrid.appendChild(option);
+        });
+    }
+    
     function getPosition(e) { 
         const rect = drawingCanvas.getBoundingClientRect();
         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -125,65 +139,110 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+
     // ----------------------------------------------------
     // Lógica da Borracha e Tamanho do Pincel
     // ----------------------------------------------------
 
-    /** Define a ferramenta ativa (Pincel ou Borracha) */
     function setActiveTool(tool, updateUI = true) {
         currentTool = tool;
 
         if (updateUI) {
-            // Atualiza o CSS de seleção dos botões
             toolButtons.forEach(btn => btn.classList.remove('selected-tool'));
             document.querySelector(`[data-tool="${tool}"]`).classList.add('selected-tool');
         }
 
         if (tool === 'eraser') {
-            // Borracha: usa 'destination-out' para apagar pixels EXISTENTES no ctx.
             ctx.globalCompositeOperation = 'destination-out';
             ctx.strokeStyle = 'rgba(0,0,0,1)';
         } else {
-            // Pincel: volta para 'source-over'
             ctx.globalCompositeOperation = 'source-over';
             ctx.strokeStyle = currentColor;
         }
     }
 
-    /** Atualiza a cor do pincel e a seleção visual */
     function updateColor(color, element) {
         currentColor = color;
-        // Só atualiza o strokeStyle se o modo for Pincel
         if (currentTool === 'brush') {
             ctx.strokeStyle = currentColor;
         }
         
         document.querySelectorAll('.color-swatch, .color-picker-button').forEach(s => s.classList.remove('selected'));
-        element.classList.add('selected');
+        if (element) {
+             element.classList.add('selected');
+        }
     }
     
-    // [Funções setupImageSelection (Mantida)]
-    function setupImageSelection() {
-        imageSelectionGrid.innerHTML = '';
-        drawingImages.forEach((fileName, index) => {
-            const option = document.createElement('div');
-            option.classList.add('image-option');
-            option.dataset.image = fileName;
-            
-            const img = document.createElement('img');
-            img.src = `images/drawing/${fileName}`;
-            img.alt = `Desenho para colorir ${index + 1}`;
-            option.appendChild(img);
-            
-            option.addEventListener('click', () => {
-                selectDrawingImage(option, fileName);
-            });
-            imageSelectionGrid.appendChild(option);
-        });
+    // Lógica para Salvar e Marca D'água (Melhor Qualidade)
+    function saveDrawing(format) {
+        const originalWidth = drawingCanvas.width;
+        const originalHeight = drawingCanvas.height;
+        
+        // Crie um canvas temporário maior para melhor qualidade de texto/saída (Ex: 800x800)
+        const outputSize = 800;
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = outputSize;
+        tempCanvas.height = outputSize;
+        const tempCtx = tempCanvas.getContext('2d');
+
+        // Escala para o Canvas Temporário
+        const scale = outputSize / originalWidth;
+
+        // 1. Desenha o fundo e o desenho escalados
+        tempCtx.drawImage(bgCanvas, 0, 0, tempCanvas.width, tempCanvas.height); 
+        tempCtx.drawImage(drawingCanvas, 0, 0, tempCanvas.width, tempCanvas.height); 
+
+        // 2. --- LÓGICA DA MARCA D'ÁGUA DE ALTA QUALIDADE ---
+        
+        const padding = outputSize * 0.04; 
+
+        // Rillary (Pacifico)
+        const rillaryFontSize = outputSize * 0.08;
+        tempCtx.font = `${rillaryFontSize}px 'Pacifico', cursive`;
+        tempCtx.textAlign = 'left';
+        tempCtx.shadowColor = 'rgba(255, 139, 160, 0.7)';
+        tempCtx.shadowBlur = outputSize * 0.005;
+        tempCtx.fillStyle = '#4D87E6'; 
+        
+        const rillaryText = 'Rillary 5 Aninhos 🌸';
+        tempCtx.fillText(rillaryText, padding, padding + rillaryFontSize);
+        
+        // Mensagem de Agradecimento (Bubblegum Sans)
+        const thankYouFontSize = outputSize * 0.04; 
+        tempCtx.font = `${thankYouFontSize}px 'Bubblegum Sans', cursive`;
+        tempCtx.fillStyle = '#FF8BA0'; 
+        tempCtx.shadowBlur = outputSize * 0.003;
+        
+        const thankYouText = 'Muito obrigada por usar o meu site.';
+        tempCtx.fillText(thankYouText, padding, padding + rillaryFontSize + thankYouFontSize + (outputSize * 0.01));
+        
+        // 3. Salvar a imagem/PDF
+        
+        if (format === 'pdf') {
+             // Lógica de PDF (Requer biblioteca jsPDF ou similar - Aqui apenas simula o download)
+             alert('A opção PDF requer uma biblioteca externa (como jsPDF) e mais configuração. Para simplicidade e compatibilidade no GitHub Pages, baixe em PNG ou JPG e use um conversor online se necessário.');
+             return;
+        }
+        
+        let mimeType = format === 'jpg' ? 'image/jpeg' : 'image/png';
+        let quality = format === 'jpg' ? 0.9 : 1.0;
+
+        const dataURL = tempCanvas.toDataURL(mimeType, quality);
+        const a = document.createElement('a');
+        a.href = dataURL;
+        a.download = `Desenho_Rillary_5Anos.${format}`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        alert(`Desenho salvo em ${format.toUpperCase()}!`);
+
+        // Esconde as opções de salvamento
+        saveOptionsDiv.style.display = 'none';
     }
 
+
     // ----------------------------------------------------
-    // Event Listeners
+    // Event Listeners e Controles
     // ----------------------------------------------------
 
     // Desenho/Toque
@@ -196,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
     drawingCanvas.addEventListener('touchcancel', stopDrawing);
     drawingCanvas.addEventListener('touchmove', draw);
 
-    // Seleção de Cor
+    // Controles de Cor
     colorSwatches.forEach(swatch => {
         swatch.addEventListener('click', () => {
             updateColor(swatch.dataset.color, swatch);
@@ -208,10 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateColor(e.target.value, colorPickerButton);
         setActiveTool('brush'); 
     });
-    colorPickerButton.addEventListener('click', () => {
-        colorInput.value = currentColor;
-    });
-
+    
     // Ferramentas
     toolButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -219,17 +275,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Tamanho do Pincel/Borracha
-    sizeButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            brushSize = parseInt(button.dataset.size);
-            ctx.lineWidth = brushSize;
-            sizeButtons.forEach(btn => btn.classList.remove('selected-size'));
-            button.classList.add('selected-size');
-        });
+    // Barra Deslizante de Tamanho (NOVA LÓGICA)
+    brushSizeSlider.addEventListener('input', () => {
+        brushSize = parseInt(brushSizeSlider.value);
+        ctx.lineWidth = brushSize;
+        currentSizeDisplay.textContent = `${brushSize} px`;
+        // Remove a seleção visual dos botões antigos se houver
+        document.querySelectorAll('.size-button').forEach(btn => btn.classList.remove('selected-size'));
     });
-
-    // Botão Limpar (Agora só limpa o Canvas Superior!)
+    
+    // Botão Limpar
     clearButton.addEventListener('click', () => {
         if (confirm('Tem certeza que deseja limpar apenas o seu desenho?')) {
             ctx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
@@ -242,71 +297,23 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.image-option').forEach(opt => opt.classList.remove('selected'));
         selectedImageObj = null; 
         lastLoadedImageName = null;
-        resizeCanvas(); // Limpa e redesenha o fundo (que será branco, pois selectedImageObj é null)
-        alert('Modo de Desenho Livre ativado! Divirta-se!');
+        ctx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height); // Limpa o desenho
+        resizeCanvas(); 
+        alert('Modo de Desenho Livre ativado! Tela Branca.');
     });
     
-    // Botão Salvar Desenho (Otimizado para salvar ambas as camadas COM MARCA D'ÁGUA)
-    saveButton.addEventListener('click', () => {
-        // Cria um canvas temporário para juntar as duas camadas
-        const tempCanvas = document.createElement('canvas');
-        tempCanvas.width = drawingCanvas.width;
-        tempCanvas.height = drawingCanvas.height;
-        const tempCtx = tempCanvas.getContext('2d');
-
-        // 1. Desenha o fundo (imagem de contorno)
-        tempCtx.drawImage(bgCanvas, 0, 0); 
-        // 2. Desenha o desenho do usuário por cima
-        tempCtx.drawImage(drawingCanvas, 0, 0); 
-
-        // 3. --- LÓGICA DA MARCA D'ÁGUA NO TOPO ---
-        
-        const canvasWidth = tempCanvas.width;
-        const canvasHeight = tempCanvas.height;
-        
-        // Usaremos uma área no topo para a marca d'água, deixando o resto para o desenho.
-        const headerHeight = canvasHeight * 0.15; // 15% do topo para o cabeçalho
-        const padding = canvasWidth * 0.03;       // 3% de margem lateral
-
-        // Configuração da cor e sombra da marca d'água
-        tempCtx.shadowColor = 'rgba(255, 139, 160, 0.7)'; 
-        tempCtx.shadowBlur = 5;
-        tempCtx.fillStyle = '#4D87E6'; 
-
-        // --- Nome "Rillary" (Fonte Pacifico) ---
-        const rillaryFontSize = canvasWidth * 0.06; // Reduzido para caber no topo
-        tempCtx.font = `${rillaryFontSize}px 'Pacifico', cursive`;
-        tempCtx.textAlign = 'left'; // Alinha o texto à esquerda
-        
-        const rillaryText = 'Rillary';
-        const rillaryX = padding;
-        const rillaryY = padding + rillaryFontSize; // Posiciona no topo, com margem
-
-        tempCtx.fillText(rillaryText, rillaryX, rillaryY);
-
-        // --- Frase "5 aninhos 🌸" (Fonte Bubblegum Sans) ---
-        const ageFontSize = canvasWidth * 0.04; // Reduzido
-        tempCtx.font = `${ageFontSize}px 'Bubblegum Sans', cursive`;
-        tempCtx.fillStyle = '#FF8BA0'; 
-        tempCtx.shadowColor = 'rgba(77, 135, 230, 0.7)';
-        
-        const ageText = '5 aninhos 🌸';
-        const ageX = padding;
-        const ageY = rillaryY + ageFontSize + (canvasWidth * 0.01); // Abaixo do nome Rillary
-        
-        tempCtx.fillText(ageText, ageX, ageY);
-        
-        // 4. Salvar a imagem
-        const dataURL = tempCanvas.toDataURL('image/png');
-        const a = document.createElement('a');
-        a.href = dataURL;
-        a.download = `Desenho_Rillary_5Anos_${Date.now()}.png`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        alert('Desenho final (contorno + cores) salvo!');
+    // Botão Abrir Opções de Salvar
+    openSaveOptionsButton.addEventListener('click', () => {
+        saveOptionsDiv.style.display = saveOptionsDiv.style.display === 'none' ? 'block' : 'none';
     });
     
+    // Botões de Download
+    downloadButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            saveDrawing(btn.dataset.format);
+        });
+    });
+
     // ----------------------------------------------------
     // Inicialização
     // ----------------------------------------------------
@@ -315,5 +322,5 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', resizeCanvas);
     
     updateColor(colorSwatches[0].dataset.color, colorSwatches[0]);
-    setActiveTool('brush', false); // Chama para configurar o ctx, mas sem re-selecionar o botão
+    setActiveTool('brush', false);
 });
