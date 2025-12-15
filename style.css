@@ -541,7 +541,7 @@ body {
 }
 
 #drawing-canvas {
-    z-index: 2; 
+    z-index: 3; 
 }
 
 /* --- CONTROLES DE IMAGEM/TAMANHO --- */
