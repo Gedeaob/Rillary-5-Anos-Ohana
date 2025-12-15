@@ -1,12 +1,12 @@
 /* Paleta de Cores e Fontes */
 :root {
-    --color-blue-main: #4D87E6;    [cite_start]/* Azul primário do Stitch [cite: 58] */
-    --color-pink-main: #FF8BA0;    [cite_start]/* Rosa da Angel e Destaques [cite: 59] */
+    --color-blue-main: #4D87E6;    /* Azul primário do Stitch */
+    --color-pink-main: #FF8BA0;    /* Rosa da Angel e Destaques */
     --color-tropical-yellow: #FFD700;
     --color-background: #E8F0FE;
     --color-text-dark: #1F3F6D;
     
-    [cite_start]/* Cores do Gradiente para Animação [cite: 163, 164, 165, 166, 167, 168] */
+    /* Cores do Gradiente para Animação */
     --color-grad-1-b: #1F3F6D;   /* Azul Forte (Navy) */
     --color-grad-2-b: #4D87E6;   /* Azul Suave (Main Blue) */
     --color-grad-3-b: #E8F0FE;   /* Azul Claro (Light Background) */
@@ -19,19 +19,19 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    [cite_start]font-family: 'Bubblegum Sans', cursive; [cite: 61]
+    font-family: 'Bubblegum Sans', cursive;
 }
 
 body {
-    background: linear-gradient(135deg, var(--color-background), #B0C4DE); [cite_start]/* Fundo suave [cite: 63, 64] */
-    [cite_start]color: var(--color-text-dark); [cite: 60]
-    [cite_start]line-height: 1.6; [cite: 62]
-    [cite_start]min-height: 100vh; [cite: 62]
-    [cite_start]padding: 10px; [cite: 62]
-    display: flex; [cite_start]/* Para centralizar o conteúdo verticalmente [cite: 65] */
-    [cite_start]flex-direction: column; [cite: 65]
+    background: linear-gradient(135deg, var(--color-background), #B0C4DE); /* Fundo suave */
+    color: var(--color-text-dark);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 10px;
+    display: flex; 
+    flex-direction: column;
     justify-content: center;
-    [cite_start]align-items: center; [cite: 66]
+    align-items: center;
 }
 
 /* --- TELA INICIAL & PÁGINAS GERAIS --- */
@@ -41,103 +41,103 @@ body {
 }
 
 .menu-container {
-    [cite_start]text-align: center; [cite: 67]
+    text-align: center;
     max-width: 500px;
     padding: 20px;
     border-radius: 20px;
     background-color: rgba(255, 255, 255, 0.9);
-    [cite_start]box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); [cite: 67]
-    [cite_start]margin: 20px auto 0; [cite: 68]
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    margin: 20px auto 0;
 }
 
 .rillary-name {
-    [cite_start]font-family: 'Pacifico', cursive; [cite: 69]
-    [cite_start]font-size: 4.5rem; [cite: 131]
-    [cite_start]color: var(--color-blue-main); [cite: 69]
-    [cite_start]text-shadow: 3px 3px 0px var(--color-pink-main); [cite: 69]
+    font-family: 'Pacifico', cursive;
+    font-size: 4.5rem;
+    color: var(--color-blue-main);
+    text-shadow: 3px 3px 0px var(--color-pink-main);
     opacity: 0; 
     transform: translateY(-20px);
-    [cite_start]transition: opacity 0.8s ease-out, transform 0.8s ease-out; [cite: 132]
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 .age-text {
     font-size: 1.8rem;
-    [cite_start]color: var(--color-text-dark); [cite: 71]
+    color: var(--color-text-dark);
     margin-top: -10px;
     opacity: 0;
     transform: translateY(-20px);
-    [cite_start]transition: opacity 0.8s ease-out, transform 0.8s ease-out; [cite: 72]
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 @keyframes pulse {
-    [cite_start]0% { transform: scale(1); [cite: 73] }
-    [cite_start]100% { transform: scale(1.03); box-shadow: 0 0 10px var(--color-pink-main), 0 0 5px var(--color-blue-main); [cite: 74] }
+    0% { transform: scale(1); }
+    100% { transform: scale(1.03); box-shadow: 0 0 10px var(--color-pink-main), 0 0 5px var(--color-blue-main); }
 }
 
 .button-group {
-    [cite_start]display: flex; [cite: 77]
-    [cite_start]flex-direction: column; [cite: 77]
-    [cite_start]gap: 15px; [cite: 77]
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     margin-top: 30px;
 }
 
 .game-button {
-    [cite_start]text-decoration: none; [cite: 78]
+    text-decoration: none;
     padding: 15px 25px;
-    [cite_start]border-radius: 30px; [cite: 136]
+    border-radius: 30px;
     font-size: 1.4rem;
     font-weight: bold;
-    [cite_start]color: white; [cite: 78]
+    color: white;
     box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
-    [cite_start]transition: all 0.2s ease-in-out; [cite: 137]
+    transition: all 0.2s ease-in-out;
     border: none;
-    [cite_start]cursor: pointer; [cite: 79]
+    cursor: pointer;
 }
 
 .pink-button {
-    [cite_start]background-color: var(--color-pink-main); [cite: 59]
+    background-color: var(--color-pink-main);
     box-shadow: 0 5px 0 #D37488;
 }
 
 .blue-button {
-    [cite_start]background-color: var(--color-blue-main); [cite: 80]
-    [cite_start]box-shadow: 0 5px 0 #3C6CB5; [cite: 80]
+    background-color: var(--color-blue-main);
+    box-shadow: 0 5px 0 #3C6CB5;
 }
 
 .game-button:hover {
-    [cite_start]transform: translateY(-2px); [cite: 81]
-    [cite_start]box-shadow: 0 7px 0 rgba(0, 0, 0, 0.2); [cite: 81]
+    transform: translateY(-2px);
+    box-shadow: 0 7px 0 rgba(0, 0, 0, 0.2);
 }
 
 .game-button:active {
-    [cite_start]transform: translateY(3px); [cite: 82]
-    [cite_start]box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2); [cite: 82]
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 .home-link {
-    [cite_start]display: block; [cite: 85]
-    [cite_start]margin-top: 15px; [cite: 85]
+    display: block;
+    margin-top: 15px;
     font-size: 1.1rem;
     color: var(--color-pink-main);
     text-decoration: none;
-    [cite_start]font-weight: bold; [cite: 86]
+    font-weight: bold;
 }
 
 /* --- RODAPÉ --- */
 .main-footer {
-    [cite_start]width: 100%; [cite: 87]
+    width: 100%;
     max-width: 500px;
-    [cite_start]margin-top: 30px; [cite: 87]
-    [cite_start]padding: 10px; [cite: 140]
-    [cite_start]border-top: 2px solid var(--color-pink-main); [cite: 140]
-    [cite_start]color: var(--color-text-dark); [cite: 140]
-    [cite_start]font-size: 0.9rem; [cite: 140]
-    [cite_start]line-height: 1.4; [cite: 140]
-    [cite_start]text-align: center; [cite: 141]
+    margin-top: 30px;
+    padding: 10px;
+    border-top: 2px solid var(--color-pink-main);
+    color: var(--color-text-dark);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    text-align: center;
 }
 
 .GTech-name {
-    [cite_start]color: #0624cc; [cite: 89] /* Ajuste para ser mais visível que o verde neon */
+    color: #0624cc;
     font-weight: bold;
 }
 
@@ -145,7 +145,7 @@ body {
 
 .game-page-container {
     padding: 20px;
-    [cite_start]max-width: 600px; [cite: 134]
+    max-width: 600px;
     margin: 20px auto;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.95);
@@ -154,34 +154,34 @@ body {
 }
 
 .game-header {
-    [cite_start]background-color: var(--color-blue-main); [cite: 135]
+    background-color: var(--color-blue-main);
     color: white;
     padding: 10px;
-    [cite_start]border-radius: 10px; [cite: 135]
-    [cite_start]margin-bottom: 15px; [cite: 135]
+    border-radius: 10px;
+    margin-bottom: 15px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
 }
 
 /* --- ESTILO PARA JOGO DE DESENHO (DRAWING) --- */
 
 .game-area-wrapper {
-    [cite_start]position: relative; [cite: 147]
+    position: relative;
     margin: 0 auto;
-    [cite_start]padding: 10px; [cite: 147]
-    [cite_start]background-color: white; [cite: 148]
+    padding: 10px;
+    background-color: white;
     border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     width: 100%;
-    [cite_start]max-width: 600px; [cite: 148]
+    max-width: 600px;
     aspect-ratio: 1 / 1; 
 }
 
 .drawing-layer {
-    [cite_start]position: absolute; [cite: 149]
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    [cite_start]height: 100%; [cite: 149]
+    height: 100%;
 }
 
 /* CORREÇÃO: Aumenta Z-index para ficarem acima dos pseudo-elementos da borda */
@@ -190,85 +190,85 @@ body {
 }
 
 #drawing-canvas {
-    [cite_start]z-index: 3; [cite: 150]
+    z-index: 3;
 }
 
 /* --- JOGO DA BOLINHA (BALL GAME) E ANIMAÇÃO --- */
 
-[cite_start]/* 1. Definição da Animação de Rotação [cite: 169] */
+/* 1. Definição da Animação de Rotação */
 @keyframes border-rotate {
     to {
         transform: rotate(360deg);
     }
 }
 
-[cite_start]/* 2. Estilo da Borda Giratória (Targeting o Wrapper e a Zona de Controle) [cite: 170] */
+/* 2. Estilo da Borda Giratória (Targeting o Wrapper e a Zona de Controle) */
 .game-area-wrapper,
 #control-zone {
-    border: none !important; [cite_start]/* Remove borda estática [cite: 170] */
-    [cite_start]position: relative; [cite: 170]
+    border: none !important; 
+    position: relative;
     overflow: hidden; 
-    [cite_start]padding: 3px; [cite: 171]
+    padding: 3px;
     transition: box-shadow 0.3s ease; 
 }
 
-[cite_start]/* 3. Criação do Pseudo-Elemento (A Borda Giratória) [cite: 173] */
+/* 3. Criação do Pseudo-Elemento (A Borda Giratória) */
 .game-area-wrapper::before,
 #control-zone::before {
     content: '';
-    [cite_start]position: absolute; [cite: 173]
-    inset: -20px; [cite_start]/* Expande o gradiente [cite: 173] */
+    position: absolute;
+    inset: -20px; 
     background: conic-gradient(
         var(--color-grad-1-b) 0deg, var(--color-grad-2-b) 60deg, var(--color-grad-3-b) 120deg,
         var(--color-grad-1-p) 180deg, var(--color-grad-2-p) 240deg, var(--color-grad-3-p) 300deg,
         var(--color-grad-1-b) 360deg
-    [cite_start]); [cite: 174]
-    animation: border-rotate 6s linear infinite; [cite_start]/* Aplica a rotação [cite: 175] */
-    [cite_start]z-index: 0; [cite: 176]
+    );
+    animation: border-rotate 6s linear infinite;
+    z-index: 0;
 }
 
-[cite_start]/* 4. Estilo do Conteúdo Principal (Máscara Branca) [cite: 177] */
+/* 4. Estilo do Conteúdo Principal (Máscara Branca) */
 .game-area-wrapper::after,
 #control-zone::after {
     content: '';
-    [cite_start]position: absolute; [cite: 177]
-    inset: 3px; [cite_start]/* Espessura da borda animada [cite: 177] */
-    background: white; [cite_start]/* Cor de fundo interna [cite: 178] */
+    position: absolute;
+    inset: 3px; 
+    background: white; 
     border-radius: 10px;
-    [cite_start]z-index: 1; [cite: 179]
+    z-index: 1;
 }
 
 /* Garante que o Canvas e o texto da zona de controle fiquem no topo */
 #bouncing-ball-canvas,
 #control-zone p {
-    [cite_start]position: relative; [cite: 180]
-    [cite_start]z-index: 2; [cite: 180]
+    position: relative;
+    z-index: 2;
 }
 
 #bouncing-ball-canvas {
-    [cite_start]width: 100%; [cite: 117]
-    [cite_start]height: 100%; [cite: 117]
+    width: 100%;
+    height: 100%;
     display: block;
     border-radius: 10px;
-    [cite_start]background-color: #f0f8ff; [cite: 154]
+    background-color: #f0f8ff;
 }
 
 /* --- ZONA DE CONTROLE DEDICADA --- */
 #control-zone {
-    [cite_start]width: 100%; [cite: 181]
-    [cite_start]max-width: 600px; [cite: 181]
+    width: 100%;
+    max-width: 600px;
     height: 80px; 
     border-radius: 10px;
     margin-top: 10px;
-    [cite_start]display: flex; [cite: 182]
-    [cite_start]justify-content: center; [cite: 182]
+    display: flex;
+    justify-content: center;
     align-items: center;
     
-    /* CORREÇÃO CRÍTICA: Impede seleção de texto e menus de cópia no celular */
-    [cite_start]user-select: none; [cite: 183]
-    [cite_start]-webkit-user-select: none; [cite: 183]
-    [cite_start]-moz-user-select: none; [cite: 184]
-    [cite_start]-ms-user-select: none; [cite: 184]
+    /* CRÍTICO: Impede seleção de texto e menus de cópia no celular */
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 
@@ -276,22 +276,22 @@ body {
 
 .image-selection-grid {
     display: grid;
-    [cite_start]grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); [cite: 151]
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
     gap: 10px;
     margin-bottom: 20px;
 }
 
 .image-option.selected {
-    [cite_start]border-color: var(--color-pink-main); [cite: 152]
-    [cite_start]transform: scale(1.05); [cite: 152]
-    [cite_start]box-shadow: 0 0 10px rgba(255, 139, 160, 0.7); [cite: 152]
+    border-color: var(--color-pink-main);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 139, 160, 0.7);
 }
 
 /* --- RESPONSIVIDADE --- */
 @media (min-width: 600px) {
     .button-group {
-        [cite_start]flex-direction: row; [cite: 157]
-        [cite_start]justify-content: center; [cite: 157]
+        flex-direction: row;
+        justify-content: center;
         gap: 20px;
     }
 }
