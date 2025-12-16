@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         imageLoaded = true;
         draw(); 
     };
-
+// Array de blocos (cabeça do stitch)
     let blocks = [];
     const blockRowCount = 4; // 4 fileiras
     const blockColumnCount = 8;
@@ -48,17 +48,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------
     
     function resizeCanvas() {
-        const size = Math.min(wrapper.clientWidth - 20, 600);
+        const size = Math.min(wrapper.clientWidth, 600);
         canvas.width = size;
         canvas.height = size;
         
-        // Paleta mais larga (25%)
         paddle.width = canvas.width * 0.25; 
         paddle.x = (canvas.width - paddle.width) / 2;
+        
+        ball.radius = canvas.width * 0.03;
+
+        // --- CORREÇÃO DE VELOCIDADE ---
+        // A velocidade é 0.8% da largura da tela. 
+        // Em 300px = 2.4px/frame. Em 600px = 4.8px/frame.
+        // Isso mantém a dificuldade consistente.
+        let baseSpeed = canvas.width * 0.008; 
+        
+        // Mantém a direção atual, mas ajusta a magnitude
+        ball.dx = (ball.dx > 0 ? 1 : -1) * baseSpeed;
+        ball.dy = (ball.dy > 0 ? 1 : -1) * baseSpeed;
+
         ball.x = canvas.width / 2;
         ball.y = canvas.height - paddle.height - ball.radius - 5;
     }
-    
+     
+    // Inicializa o Jogo
     function initGame() {
         score = 0;
         scoreDisplay.textContent = `Pontos: ${score}`;
