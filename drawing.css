@@ -1,0 +1,170 @@
+/* drawing.css - Estilos exclusivos para o Jogo de Desenho */
+
+/* Mantém as variáveis globais para as cores combinarem */
+:root {
+    --color-blue-main: #4D87E6;
+    --color-pink-main: #FF8BA0;
+    --color-tropical-yellow: #FFD700;
+    --color-background: #E8F0FE;
+    --color-text-dark: #1F3F6D;
+}
+
+/* Área principal */
+.game-page-container {
+    padding: 20px;
+    max-width: 600px;
+    width: 95%;
+    margin: 0 auto;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.game-header {
+    background-color: var(--color-blue-main);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* --- 1. GRADE DE IMAGENS (Correção do tamanho) --- */
+.image-selection-grid {
+    display: grid;
+    /* Cria colunas automáticas de no mínimo 70px */
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); 
+    gap: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.image-option {
+    aspect-ratio: 1 / 1; /* Força ser quadrado */
+    border: 3px solid #ddd;
+    border-radius: 10px;
+    cursor: pointer;
+    overflow: hidden;
+    background: white;
+    transition: transform 0.2s;
+}
+
+/* Força a imagem a caber no quadrado */
+.image-option img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
+}
+
+.image-option.selected {
+    border-color: var(--color-pink-main);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 139, 160, 0.7);
+}
+
+/* --- 2. FERRAMENTAS E SLIDER --- */
+.tool-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.palette {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.color-swatch, .color-picker-button {
+    width: 40px;
+    height: 40px;
+    border: 3px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.color-swatch.selected, .tool-button.selected-tool {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 3px var(--color-tropical-yellow);
+}
+
+/* Estilo do Slider (Barra Deslizante) */
+.brush-size-controls {
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.brush-size-controls input[type=range] {
+    width: 80%;
+    accent-color: var(--color-pink-main);
+    cursor: pointer;
+}
+
+/* --- 3. ÁREA DE DESENHO (Correção do Z-Index/Tela Branca) --- */
+.game-area-wrapper {
+    position: relative;
+    margin: 0 auto 20px auto;
+    background-color: white;
+    border: 4px solid var(--color-blue-main);
+    border-radius: 15px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    touch-action: none; /* Impede a tela de rolar enquanto desenha no celular */
+}
+
+.drawing-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* AQUI ESTÁ A CORREÇÃO DA TELA BRANCA */
+/* O fundo fica embaixo (z-index 1) */
+#background-canvas {
+    z-index: 1; 
+}
+/* O desenho fica em cima (z-index 2) */
+#drawing-canvas {
+    z-index: 2; 
+}
+
+/* Botões */
+.game-button {
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+    text-decoration: none;
+    display: inline-block;
+}
+.pink-button { background-color: var(--color-pink-main); }
+.blue-button { background-color: var(--color-blue-main); }
+.green-button { background-color: #25D366; } /* Para o botão compartilhar */
+
+.drawing-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+#save-options {
+    margin-top: 15px;
+    padding: 10px;
+    border: 2px dashed var(--color-pink-main);
+    border-radius: 10px;
+    display: none; /* Começa escondido */
+}
