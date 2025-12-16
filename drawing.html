@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desenho do Stitch</title>
-    <link rel="stylesheet" href="src/styles/styles.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="drawing.css"> 
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Bubblegum+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -12,74 +13,68 @@
     <div class="game-page-container">
         
         <header class="game-header">
-            <h3>🖍️ Hora de Colorir e Desenhar!</h3> 
+            <h3>🖍️ Hora de Colorir!</h3>
         </header>
 
-        <h4 style="margin-bottom: 10px; color: var(--color-blue-main);">1. Escolha um desenho para colorir:</h4> 
+        <h4 style="color: var(--color-blue-main);">1. Escolha um desenho:</h4>
         <div id="image-selection-grid" class="image-selection-grid">
             </div>
 
-        <button id="free-draw-button" class="game-button pink-button" style="margin-bottom: 20px; font-size: 1.2rem; padding: 10px 15px;">Desenho Livre (Tela Branca)</button>
+        <button id="free-draw-button" class="game-button pink-button" style="width: 100%; margin-bottom: 20px;">
+            Ou Tela Branca (Livre)
+        </button>
 
-        <h4 style="margin-bottom: 10px; color: var(--color-blue-main);">2. Selecione sua cor e comece a arte!</h4> 
+        <h4 style="color: var(--color-blue-main);">2. Escolha a cor:</h4>
         <div id="color-palette" class="palette">
-           <button class="color-swatch" style="background-color: #4D87E6;" data-color="#4D87E6" title="Azul Stitch"></button> 
-           <button class="color-swatch" style="background-color: #FF8BA0;" data-color="#FF8BA0" title="Rosa Angel"></button> 
-            <button class="color-swatch" style="background-color: #00AA00;" data-color="#00AA00" title="Verde Havaiano"></button> 
-            <button class="color-swatch" style="background-color: #FF0000;" data-color="#FF0000" title="Vermelho"></button> 
-           <button class="color-swatch" style="background-color: #FFD700;" data-color="#FFD700" title="Amarelo"></button> 
+            <button class="color-swatch" style="background-color: #4D87E6;" data-color="#4D87E6"></button>
+            <button class="color-swatch" style="background-color: #FF8BA0;" data-color="#FF8BA0"></button>
+            <button class="color-swatch" style="background-color: #00AA00;" data-color="#00AA00"></button>
+            <button class="color-swatch" style="background-color: #FF0000;" data-color="#FF0000"></button>
+            <button class="color-swatch" style="background-color: #FFD700;" data-color="#FFD700"></button>
+            <button class="color-swatch" style="background-color: #000000;" data-color="#000000"></button>
             
-            <div class="color-picker-button" title="Mais Cores">
-                <input type="color" id="color-input" value="#000000">
-                🎨
+            <div class="color-picker-button">
+                <input type="color" id="color-input" value="#000000" style="opacity: 0; width: 100%; height: 100%; cursor: pointer;">
+                <span style="position: absolute; pointer-events: none;">🎨</span>
             </div>
         </div>
 
-        <h4 style="margin-top: 20px; margin-bottom: 10px; color: var(--color-blue-main);">3. Ferramentas e Pincel:</h4> 
-
-        <div class="tool-controls" style="display: flex; justify-content: center; gap: 15px; margin-bottom: 20px;">
-            <button id="brush-tool" class="game-button pink-button tool-button selected-tool" data-tool="brush" style="width: 80px; padding: 10px; font-size: 1rem;" title="Pincel">
-               🖌️ Pincel 
-            </button>
-            <button id="eraser-tool" class="game-button blue-button tool-button" data-tool="eraser" style="width: 80px; padding: 10px; font-size: 1rem;" title="Borracha">
-                ⬜ Borracha
-            </button>
+        <div class="tool-controls">
+            <button id="brush-tool" class="game-button pink-button tool-button selected-tool" data-tool="brush">🖌️ Pincel</button>
+            <button id="eraser-tool" class="game-button blue-button tool-button" data-tool="eraser">⬜ Borracha</button>
         </div>
 
-        <div class="brush-size-controls" style="display: flex; flex-direction: column; align-items: center; gap: 5px; margin-bottom: 20px;">
-            <label style="font-size: 1.1rem; color: var(--color-text-dark);">Tamanho do Pincel:</label>
-            <input type="range" id="brush-size-slider" min="1" max="50" value="10" style="width: 80%;">
-            <span id="current-size-display" style="font-weight: bold;">10 px</span>
+        <div class="brush-size-controls">
+            <label style="color: var(--color-text-dark); font-weight: bold;">Tamanho do Pincel:</label>
+            <br>
+            <input type="range" id="brush-size-slider" min="1" max="50" value="10">
+            <span id="current-size-display">10px</span>
         </div>
         
         <div class="game-area-wrapper">
             <canvas id="background-canvas" class="drawing-layer"></canvas>
-            <canvas id="drawing-canvas" class="drawing-layer"></canvas> 
+            <canvas id="drawing-canvas" class="drawing-layer"></canvas>
         </div>
 
-        <div class="drawing-controls" style="flex-wrap: wrap;">
-            <button id="clear-canvas" class="game-button pink-button" style="width: 45%; margin-bottom: 10px;">Limpar</button>
-            <button id="open-save-options" class="game-button blue-button" style="width: 45%; margin-bottom: 10px;">Salvar Desenho! 💾</button>
-            
-            <div id="save-options" style="width: 100%; display: none; margin-top: 10px;">
-                <p style="margin-bottom: 10px;">Selecione o formato de download:</p>
-                <button class="game-button pink-button download-btn" data-format="png">PNG (Melhor Qualidade)</button>
-                <button class="game-button blue-button download-btn" data-format="jpg">JPG (Mais Leve)</button>
-                <button class="game-button pink-button download-btn" data-format="pdf">PDF (Para Imprimir)</button>
-            </div>
+        <div class="drawing-controls">
+            <button id="clear-canvas" class="game-button pink-button">Limpar</button>
+            <button id="open-save-options" class="game-button blue-button">Salvar 💾</button>
+            <button id="share-drawing" class="game-button green-button" style="display: none;">Compartilhar 📤</button>
+        </div>
+
+        <div id="save-options">
+            <p>Como você quer baixar?</p>
+            <button class="game-button blue-button download-btn" data-format="png">Baixar em PNG (Melhor)</button>
+            <button class="game-button pink-button download-btn" data-format="jpg">Baixar em JPG (Leve)</button>
         </div>
 
         <a href="index.html" class="home-link">Voltar ao Menu</a>
     </div>
 
-    <center>
-        <footer class="main-footer">
-            <p><strong>Rillary</strong></p>
-            <p>Aniversário de 5 aninhos</p>
-            <p>Obrigado por acessar o meu site.</p>
-            <p>Desenvolvido por: <a href="https://wa.me/qr/7UJXOZI2AEMBL1" class="GTech-name" target="_blank">GTech</a></p>
-        </footer>
-    </center>
+    <center><footer class="main-footer">
+        <p><strong>Rillary</strong> - 5 aninhos</p>
+        <p>Desenvolvido por: <span class="GTech-name">GTech</span></p>
+    </footer></center>
     
     <script src="script-drawing.js"></script>
 </body>
